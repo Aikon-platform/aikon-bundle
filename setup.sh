@@ -1,8 +1,10 @@
 #!/bin/bash
 
-ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-AIKON_SETUP="$ROOT_DIR/aikon/scripts/setup.sh"
-DISCOVER_SETUP="$ROOT_DIR/discover-api/setup.sh"
+AIKON_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/aikon" >/dev/null 2>&1 && pwd )"
+DISCOVER_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/discover-api" >/dev/null 2>&1 && pwd )"
+
+AIKON_SETUP="$AIKON_DIR/scripts/setup.sh"
+DISCOVER_SETUP="$DISCOVER_DIR/setup.sh"
 
 colorEcho() {
     Color_Off="\033[0m"
@@ -44,19 +46,8 @@ echoTitle(){
 
 echoTitle "AIKON BUNDLE INSTALL"
 
-# Check that both scripts exist
-if [ ! -f "$AIKON_SETUP" ]; then
-    colorEcho red "AIKON setup script not found"
-    exit 1
-fi
-
-if [ ! -f "$DISCOVER_SETUP" ]; then
-    colorEcho red "Discover setup script not found"
-    exit 1
-fi
-
 colorEcho green "AIKON installation..."
-(cd "$ROOT_DIR/aikon" && bash "$AIKON_SETUP")
+(cd "$AIKON_DIR" && bash "$AIKON_SETUP")
 
 if [ $? -ne 0 ]; then
     colorEcho red "AIKON setup encountered an error"
@@ -64,7 +55,7 @@ if [ $? -ne 0 ]; then
 fi
 
 colorEcho green "Discover installation..."
-(cd "$ROOT_DIR/discover-api" && bash "$DISCOVER_SETUP")
+(cd "$DISCOVER_DIR" && bash "$DISCOVER_SETUP")
 
 if [ $? -ne 0 ]; then
     colorEcho red "Discover setup encountered an error"
