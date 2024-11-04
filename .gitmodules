@@ -1,0 +1,7 @@
+[submodule "discover-api"]
+	path = discover-api
+	url = git@github.com:Aikon-platform/discover-api.git
+
+[submodule "aikon"]
+	path = aikon
+	url = git@github.com:Aikon-platform/aikon.git
