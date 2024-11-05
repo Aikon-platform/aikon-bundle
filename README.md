@@ -143,7 +143,7 @@ EMAIL_HOST_PASSWORD=add_a_password_or_take the_one_generated
 
 # Logos to be displayed in the footer
 APP_LOGO=anr,ponts
-``
+```
 
 ```
 # set to 'prod' to use production settings
