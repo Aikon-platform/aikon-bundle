@@ -1,11 +1,10 @@
 # AIKON Bundle version 
 
-This is a bundle version of the AIKON platform for traitement de documents historiques blabla petite présentation
+This is a bundle version of the AIKON platform : a tool for humanities scholars leveraging artificial intelligence and computer vision methods for analyzing large-scale heritage collections.
 
 [About the AIKON plateform](https://aikon-platform.github.io/)
 
-This repo contains the code for the plateform + the worker API 
-Can be run on your local machine. 
+This repo contains the code for the plateform + the worker API, allowing the whole to be easily installed and run on your local machine. 
 
 # Install 🛠️
 
