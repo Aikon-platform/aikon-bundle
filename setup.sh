@@ -47,23 +47,23 @@ echoTitle(){
     colorEcho purple "\n\n$sep_line\n$title\n$sep_line"
 }
 
-# echoTitle "AIKON BUNDLE INSTALL"
-#
-# colorEcho green "AIKON installation..."
-# (cd "$AIKON_DIR" && bash "$AIKON_SETUP")
-#
-# if [ $? -ne 0 ]; then
-#     colorEcho red "AIKON setup encountered an error"
-#     exit 1
-# # fi
-#
-# colorEcho green "Discover installation..."
-# (cd "$DISCOVER_DIR" && bash "$DISCOVER_SETUP")
-#
-# if [ $? -ne 0 ]; then
-#     colorEcho red "Discover setup encountered an error"
-#     exit 1
+echoTitle "AIKON BUNDLE INSTALL"
+
+colorEcho green "AIKON installation..."
+(cd "$AIKON_DIR" && bash "$AIKON_SETUP")
+
+if [ $? -ne 0 ]; then
+    colorEcho red "AIKON setup encountered an error"
+    exit 1
 # fi
+
+colorEcho green "Discover installation..."
+(cd "$DISCOVER_DIR" && bash "$DISCOVER_SETUP")
+
+if [ $? -ne 0 ]; then
+    colorEcho red "Discover setup encountered an error"
+    exit 1
+fi
 
 # replace CV_API_URL in aikon/.env by localhost:discover-api/.env.dev => $API_DEV_PORT
 api_port=$(grep "API_DEV_PORT" "$DISCOVER_DIR/.env.dev" | cut -d'=' -f2)
@@ -73,3 +73,9 @@ sed -i "" -e "s~^CV_API_URL=.*~CV_API_URL=$api_url~" "$AIKON_DIR/app/config/.env
 echoTitle "🎉 AIKON & DISCOVER ARE SET UP! 🎉"
 colorEcho blue "\nYou can now run the app and API with: "
 colorEcho green "              bash run.sh"
+
+user=$(grep "POSTGRES_USER" "$AIKON_DIR/app/config/.env" | cut -d'=' -f2)
+password=$(grep "POSTGRES_PASSWORD" "$AIKON_DIR/app/config/.env" | cut -d'=' -f2)
+colorEcho blue '\nConnect to app using:'
+echo -e "          👤 $user"
+echo -e "          🔑 $password"

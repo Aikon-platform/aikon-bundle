@@ -1,4 +1,4 @@
-# AIKON Bundle version 
+# <img alt="Aikon logo" src="app/webapp/static/favicon.ico" height="50" width="auto" style="display: inline; margin-bottom:-10px;"> AIKON bundle version
 
 This is a bundle version of the AIKON platform : a tool for humanities scholars leveraging artificial intelligence and computer vision methods for analyzing large-scale heritage collections.
 
