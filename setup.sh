@@ -6,6 +6,9 @@ DISCOVER_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/discover-api" >/dev/null 2
 AIKON_SETUP="$AIKON_DIR/scripts/setup.sh"
 DISCOVER_SETUP="$DISCOVER_DIR/setup.sh"
 
+git submodule init
+git submodule update
+
 colorEcho() {
     Color_Off="\033[0m"
     Red="\033[1;91m"        # Red
@@ -44,24 +47,29 @@ echoTitle(){
     colorEcho purple "\n\n$sep_line\n$title\n$sep_line"
 }
 
-echoTitle "AIKON BUNDLE INSTALL"
+# echoTitle "AIKON BUNDLE INSTALL"
+#
+# colorEcho green "AIKON installation..."
+# (cd "$AIKON_DIR" && bash "$AIKON_SETUP")
+#
+# if [ $? -ne 0 ]; then
+#     colorEcho red "AIKON setup encountered an error"
+#     exit 1
+# # fi
+#
+# colorEcho green "Discover installation..."
+# (cd "$DISCOVER_DIR" && bash "$DISCOVER_SETUP")
+#
+# if [ $? -ne 0 ]; then
+#     colorEcho red "Discover setup encountered an error"
+#     exit 1
+# fi
 
-colorEcho green "AIKON installation..."
-(cd "$AIKON_DIR" && bash "$AIKON_SETUP")
+# replace CV_API_URL in aikon/.env by localhost:discover-api/.env.dev => $API_DEV_PORT
+api_port=$(grep "API_DEV_PORT" "$DISCOVER_DIR/.env.dev" | cut -d'=' -f2)
+api_url=localhost:$(echo "$api_port" | tr -d '"')
+sed -i "" -e "s~^CV_API_URL=.*~CV_API_URL=$api_url~" "$AIKON_DIR/app/config/.env"
 
-if [ $? -ne 0 ]; then
-    colorEcho red "AIKON setup encountered an error"
-    exit 1
-fi
-
-colorEcho green "Discover installation..."
-(cd "$DISCOVER_DIR" && bash "$DISCOVER_SETUP")
-
-if [ $? -ne 0 ]; then
-    colorEcho red "Discover setup encountered an error"
-    exit 1
-fi
-
-echoTitle "🎉 AIKON AND DISCOVER ARE SET UP! 🎉"
+echoTitle "🎉 AIKON & DISCOVER ARE SET UP! 🎉"
 colorEcho blue "\nYou can now run the app and API with: "
 colorEcho green "              bash run.sh"
