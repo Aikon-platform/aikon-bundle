@@ -87,3 +87,6 @@ scripts/*.sql
 scripts/.pgpass
 
 docker/nginx.conf
+
+*.rst
+*/sas/src/*
